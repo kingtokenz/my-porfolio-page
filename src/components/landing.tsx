@@ -219,11 +219,11 @@ export function CtaSection() {
         <h2 className="text-5xl md:text-7xl font-bold tracking-tighter mb-6 text-white">Work with ibedev.</h2>
         <p className="text-xl text-neutral-400 mb-10 max-w-2xl mx-auto">Currently accepting select projects for Q3 2026. Let's see if your vision aligns with my engineering philosophy.</p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a href="mailto:ebe27712@gmail.com" className="px-8 py-4 rounded-full bg-white text-black font-medium hover:bg-neutral-100 transition-all duration-300 hover:scale-[1.03] shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_30px_rgba(255,255,255,0.25)]">
-            Email Me
+          <a href="https://wa.me/0256745261" target="_blank" rel="noopener noreferrer" className="px-8 py-4 rounded-full bg-white text-black font-medium hover:bg-neutral-100 transition-all duration-300 hover:scale-[1.03] shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_30px_rgba(255,255,255,0.25)]">
+            Get in Touch
           </a>
-          <a href="https://wa.me/0256745261" target="_blank" rel="noopener noreferrer" className="px-8 py-4 rounded-full bg-transparent border border-white/[0.15] text-white font-medium hover:bg-white/[0.05] hover:border-white/30 transition-all duration-300 hover:shadow-[0_0_15px_rgba(255,255,255,0.05)]">
-            WhatsApp
+          <a href="https://github.com/ibedev" target="_blank" rel="noopener noreferrer" className="px-8 py-4 rounded-full bg-transparent border border-white/[0.15] text-white font-medium hover:bg-white/[0.05] hover:border-white/30 transition-all duration-300 hover:shadow-[0_0_15px_rgba(255,255,255,0.05)]">
+            GitHub
           </a>
         </div>
       </div>

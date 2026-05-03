@@ -57,7 +57,7 @@ export function Navbar() {
 
         {/* CTA Button */}
         <div className="hidden md:flex items-center">
-          <a href="mailto:ebe27712@gmail.com" className="relative inline-flex h-10 items-center justify-center rounded-[12px] bg-gradient-to-r from-blue-600 to-purple-600/80 px-6 text-sm font-medium text-white shadow-[0_0_15px_rgba(37,99,235,0.2)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_25px_rgba(37,99,235,0.4)] hover:from-blue-500 hover:to-purple-500/90 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:ring-offset-2 focus:ring-offset-[#0a0a0a]">
+          <a href="https://wa.me/0256745261" target="_blank" rel="noopener noreferrer" className="relative inline-flex h-10 items-center justify-center rounded-[12px] bg-gradient-to-r from-blue-600 to-purple-600/80 px-6 text-sm font-medium text-white shadow-[0_0_15px_rgba(37,99,235,0.2)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_25px_rgba(37,99,235,0.4)] hover:from-blue-500 hover:to-purple-500/90 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:ring-offset-2 focus:ring-offset-[#0a0a0a]">
             Get in Touch
           </a>
         </div>
@@ -95,7 +95,7 @@ export function Navbar() {
                 </a>
               ))}
               <div className="pt-5 border-t border-[rgba(255,255,255,0.06)] mt-2">
-                <a href="mailto:ebe27712@gmail.com" className="w-full inline-flex h-11 items-center justify-center rounded-[12px] bg-gradient-to-r from-blue-600 to-purple-600/80 px-6 text-sm font-medium text-white shadow-[0_0_15px_rgba(37,99,235,0.2)] transition-all duration-300 hover:shadow-[0_0_25px_rgba(37,99,235,0.4)]">
+                <a href="https://wa.me/0256745261" target="_blank" rel="noopener noreferrer" className="w-full inline-flex h-11 items-center justify-center rounded-[12px] bg-gradient-to-r from-blue-600 to-purple-600/80 px-6 text-sm font-medium text-white shadow-[0_0_15px_rgba(37,99,235,0.2)] transition-all duration-300 hover:shadow-[0_0_25px_rgba(37,99,235,0.4)]">
                   Get in Touch
                 </a>
               </div>
