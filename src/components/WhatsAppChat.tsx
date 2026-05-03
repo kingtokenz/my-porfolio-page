@@ -1,14 +1,11 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageSquare, X, Send, Loader2 } from 'lucide-react';
-import { GoogleGenAI } from "@google/genai";
 
 interface Message {
   role: 'user' | 'assistant';
   content: string;
 }
-
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
 export function WhatsAppChat() {
   const [isOpen, setIsOpen] = useState(false);
@@ -46,25 +43,33 @@ export function WhatsAppChat() {
     setIsLoading(true);
 
     try {
-      const response = await ai.models.generateContent({
-        model: "gemini-3-flash-preview",
-        contents: [
-          ...messages.map(m => ({
+      // Call our secure backend endpoint
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: userMessage,
+          history: messages.map(m => ({
             role: m.role === 'assistant' ? 'model' : 'user',
             parts: [{ text: m.content }]
-          })),
-          { role: 'user', parts: [{ text: userMessage }] }
-        ],
-        config: {
-          systemInstruction: "You are ibedev's Customer Support Assistant. Your tone is professional, helpful, and friendly. provide very short, clear answers (max 2 sentences). ibedev is a full-stack developer (React, TypeScript, AI). Help users with project inquiries, technical questions, or finding contact info (Email: ebe27712@gmail.com, WhatsApp: 0256745261). Currently booking for Q3 2026.",
-        }
+          }))
+        })
       });
 
-      const aiResponse = response.text || "I'm sorry, I'm having trouble connecting to support right now. Please reach out to ibedev directly at ebe27712@gmail.com.";
-      setMessages(prev => [...prev, { role: 'assistant', content: aiResponse }]);
-    } catch (error) {
-      console.error("Gemini Error:", error);
-      setMessages(prev => [...prev, { role: 'assistant', content: "Support is currently offline. Please try again later or contact ibedev via WhatsApp at 0256745261." }]);
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to get response');
+      }
+
+      const data = await response.json();
+      setMessages(prev => [...prev, { role: 'assistant', content: data.response }]);
+    } catch (error: any) {
+      console.error("Chat Error:", error);
+      const errorMessage = error.message.includes('Too many requests') 
+        ? "You've sent too many messages. Please wait a bit before trying again."
+        : "Support is currently offline. Please try again later or contact ibedev via WhatsApp at 0256745261.";
+      
+      setMessages(prev => [...prev, { role: 'assistant', content: errorMessage }]);
     } finally {
       setIsLoading(false);
     }
