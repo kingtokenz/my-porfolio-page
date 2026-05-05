@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Search, ShoppingBag } from 'lucide-react';
+import { NikeSwoosh } from '@/components/ui/icons';
 
 const navLinks = [
-  { name: 'Projects', href: '#projects' },
-  { name: 'Expertise', href: '#features' },
-  { name: 'Experience', href: '#stats' },
-  { name: 'Testimonials', href: '#testimonials' },
-  { name: 'Contact', href: '#contact' },
+  { name: 'New & Featured', href: '#' },
+  { name: 'Men', href: '#' },
+  { name: 'Women', href: '#' },
+  { name: 'Kids', href: '#' },
+  { name: 'Sale', href: '#' },
 ];
 
 export function Navbar() {
@@ -32,13 +33,8 @@ export function Navbar() {
     >
       <div className="max-w-[1400px] mx-auto px-6 h-20 flex items-center justify-between">
         {/* Logo */}
-        <div className="flex-shrink-0 flex items-center gap-3 cursor-pointer group">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center shadow-[0_0_15px_rgba(59,130,246,0.4)] group-hover:shadow-[0_0_20px_rgba(59,130,246,0.6)] transition-shadow duration-300">
-            <div className="w-3 h-3 bg-white rounded-full" />
-          </div>
-          <span className="text-white font-semibold text-xl tracking-tight drop-shadow-[0_0_8px_rgba(255,255,255,0.2)] group-hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.4)] transition-all duration-300">
-            ibedev
-          </span>
+        <div className="flex-shrink-0 flex items-center cursor-pointer group">
+          <NikeSwoosh className="w-16 h-16 text-white transition-transform duration-300 group-hover:scale-110" />
         </div>
 
         {/* Desktop Nav */}
@@ -55,10 +51,16 @@ export function Navbar() {
           ))}
         </nav>
 
-        {/* CTA Button */}
-        <div className="hidden md:flex items-center">
-          <a href="https://wa.me/0256745261" target="_blank" rel="noopener noreferrer" className="relative inline-flex h-10 items-center justify-center rounded-[12px] bg-gradient-to-r from-blue-600 to-purple-600/80 px-6 text-sm font-medium text-white shadow-[0_0_15px_rgba(37,99,235,0.2)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_25px_rgba(37,99,235,0.4)] hover:from-blue-500 hover:to-purple-500/90 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:ring-offset-2 focus:ring-offset-[#0a0a0a]">
-            Get in Touch
+        {/* Actions */}
+        <div className="hidden md:flex items-center gap-6">
+          <button className="text-white hover:text-neutral-400 transition-colors">
+            <Search className="w-6 h-6" />
+          </button>
+          <button className="text-white hover:text-neutral-400 transition-colors">
+            <ShoppingBag className="w-6 h-6" />
+          </button>
+          <a href="#" className="relative inline-flex h-10 items-center justify-center rounded-full bg-white px-6 text-sm font-bold text-black transition-all duration-300 hover:bg-neutral-200">
+            Join Us
           </a>
         </div>
 
@@ -94,10 +96,14 @@ export function Navbar() {
                   {link.name}
                 </a>
               ))}
-              <div className="pt-5 border-t border-[rgba(255,255,255,0.06)] mt-2">
-                <a href="https://wa.me/0256745261" target="_blank" rel="noopener noreferrer" className="w-full inline-flex h-11 items-center justify-center rounded-[12px] bg-gradient-to-r from-blue-600 to-purple-600/80 px-6 text-sm font-medium text-white shadow-[0_0_15px_rgba(37,99,235,0.2)] transition-all duration-300 hover:shadow-[0_0_25px_rgba(37,99,235,0.4)]">
-                  Get in Touch
+              <div className="pt-5 border-t border-[rgba(255,255,255,0.06)] mt-2 flex flex-col gap-4">
+                <a href="#" className="w-full inline-flex h-11 items-center justify-center rounded-full bg-white px-6 text-sm font-bold text-black transition-all duration-300">
+                  Join Us
                 </a>
+                <div className="flex justify-center gap-8 text-white py-2">
+                  <Search className="w-6 h-6" />
+                  <ShoppingBag className="w-6 h-6" />
+                </div>
               </div>
             </div>
           </motion.div>
