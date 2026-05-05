@@ -5,6 +5,7 @@ import { GoogleGenAI } from "@google/genai";
 import { rateLimit } from "express-rate-limit";
 import { z } from "zod";
 import cors from "cors";
+import helmet from "helmet";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -27,16 +28,37 @@ const ChatSchema = z.object({
   history: z.array(z.object({
     role: z.enum(["user", "model"]),
     parts: z.array(z.object({ text: z.string() }))
-  })).optional()
+  })).max(20).optional()
 });
 
+const apiKey = process.env.GEMINI_API_KEY;
+const ai = apiKey ? new GoogleGenAI({ apiKey }) : null;
+
 async function startServer() {
-  app.use(cors());
+  app.use(helmet({
+    contentSecurityPolicy: {
+      directives: {
+        ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+        "img-src": ["'self'", "data:", "https://github.com/user-attachments/assets/"],
+        "connect-src": ["'self'", "https://ai.studio", "https://*.google.com"],
+        "script-src": ["'self'", "'unsafe-inline'", "'unsafe-eval'"], // Vite needs these in dev
+      },
+    },
+  }));
+  app.use(cors({
+    origin: process.env.APP_URL || true,
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type"],
+  }));
   app.use(express.json());
 
   // Request logging
   app.use((req, res, next) => {
-    console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+    const start = Date.now();
+    res.on('finish', () => {
+      const duration = Date.now() - start;
+      console.log(`${new Date().toISOString()} - ${req.method} ${req.url} ${res.statusCode} - ${duration}ms`);
+    });
     next();
   });
 
@@ -60,15 +82,11 @@ async function startServer() {
       }
 
       const { message, history } = validation.data;
-      const apiKey = process.env.GEMINI_API_KEY;
 
-      if (!apiKey) {
+      if (!ai) {
         return res.status(500).json({ error: "AI Service configuration missing" });
       }
 
-      // Secure API Key Handling
-      const ai = new GoogleGenAI({ apiKey });
-      
       const response = await ai.models.generateContent({
         model: "gemini-3-flash-preview",
         contents: [
