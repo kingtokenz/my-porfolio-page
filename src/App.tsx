@@ -10,6 +10,7 @@ import {
   Footer 
 } from "@/components/landing";
 import { WhatsAppChat } from "@/components/WhatsAppChat";
+import { AdsFactory } from "@/components/AdsFactory";
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
       <main>
         <HeroSection />
         <SocialProofSection />
+        <AdsFactory />
         <FeaturesSection />
         <ShowcaseSection />
         <StatsSection />
